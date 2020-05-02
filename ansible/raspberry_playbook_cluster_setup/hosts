@@ -1,0 +1,10 @@
+[head]
+192.168.2.20 
+
+[node]
+192.168.2.[21:23] 
+
+
+[kube-cluster:children]
+head
+node

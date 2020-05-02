@@ -1,0 +1,26 @@
+---
+# This is part of a sitewide playbook run with ansible-playbook site01-sd-card-config.yml -i hosts -k -K
+# youtube https://www.youtube.com/watch?v=B2wAJ5FLOYw&feature=youtu.be  How to build your own Raspberry Pi Kubernetes Cluster
+# ansible -i hosts raspifarm_workers -m ping
+# ansible -i hosts rapifarm_workers -m setup | grep user
+# ansible-galaxy init --init-path roles/ k8s-sd-config
+# Role upd was created successfully
+# This playbook configures  the  raspberry PI .
+
+  - name: k8s-sd-config
+    hosts: localhost 
+    vars_prompt:
+     - name: K8S_HOSTNAME
+       prompt: "What is your K8S_HOSTNAME  k8s-worker-01  ?"
+       private: no
+    remote_user: boscp08
+    become: True
+    gather_facts: True
+    pre_tasks:
+      - shell: echo 'I":" k8s-sd-config'
+    roles:
+        - k8s-sd-config
+    post_tasks:
+      - shell: echo 'I":" k8s-sd-config and put the sd card into your pi and boot..'
+         
+

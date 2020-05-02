@@ -1,0 +1,4 @@
+---
+# tasks file for k8s-cluster-setup-head
+
+ - include: k8s-init-cluster-on-head-node.yml

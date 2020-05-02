@@ -1,0 +1,102 @@
+---
+# This is a sitewide playbook  kubernetes head 
+# filename: site.yml
+# cd into /home/boscp08/Kubernetes/ansible/raspberry_playbook_k8s
+# cmd= ansible-playbook site.yml -i hosts -k -K
+
+    
+    - include: k8s-init-cluster-on-head-node.yml  
+ 
+
+
+ 
+ # ansible -i hosts raspifarm_eth0_master  -m ping
+ # ubuntuvbx | SUCCESS => {
+ #    "ansible_facts": {
+ #        "discovered_interpreter_python": "/usr/bin/python"
+ #    }, 
+ #    "changed": false, 
+ #    "ping": "pong"
+ #}
+ #ubuntuvmx | SUCCESS => {
+ #    "ansible_facts": {
+ #        "discovered_interpreter_python": "/usr/bin/python"
+ #    }, 
+ #    "changed": false, 
+ #    "ping": "pong"
+ #}
+ # ansible -i hosts dingofarm_workers -m ping
+ # ansible -i hosts dingofarm_workers -m setup | grep user
+ # ansible-galaxy init --init-path roles/ upd
+
+# PLAY RECAP ***********************************************************************************************************
+# 192.168.2.30               : ok=65   changed=26   unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   
+# 192.168.2.31               : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+# 192.168.2.32               : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+# 192.168.2.33               : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+# 
+# boscp08@boscp08-dingo:~/.../raspberry_playbook_k8s$ ssh pi@192.168.2.20
+# The authenticity of host '192.168.2.20 (192.168.2.20)' can't be established.
+# ECDSA key fingerprint is SHA256:d7LGdXo0OC3iIcGjRp0Sk5dhEDxIbneEU5AwM5PUc6c.
+# Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+# Warning: Permanently added '192.168.2.20' (ECDSA) to the list of known hosts.
+# Linux k8s-head 4.19.97-v7l+ #1294 SMP Thu Jan 30 13:21:14 GMT 2020 armv7l
+# 
+# The programs included with the Debian GNU/Linux system are free software;
+# the exact distribution terms for each program are described in the
+# individual files in /usr/share/doc/*/copyright.
+# 
+# Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+# permitted by applicable law.
+# Last login: Fri Apr  3 11:28:56 2020
+# pi@k8s-head:~ $ uptime
+#  11:29:34 up 0 min,  2 users,  load average: 0.22, 0.07, 0.02
+# pi@k8s-head:~ $ free
+#               total        used        free      shared  buff/cache   available
+# Mem:        3946976      144380     3570764        8656      231832     3674620
+# Swap:             0           0           0
+# pi@k8s-head:~ $ df
+# Filesystem     1K-blocks    Used Available Use% Mounted on
+# /dev/root       30392060 1838024  27287564   7% /
+# devtmpfs         1841392       0   1841392   0% /dev
+# tmpfs            1973488       0   1973488   0% /dev/shm
+# tmpfs            1973488    8652   1964836   1% /run
+# tmpfs               5120       4      5116   1% /run/lock
+# tmpfs            1973488       0   1973488   0% /sys/fs/cgroup
+# /dev/mmcblk0p1    258095   53463    204633  21% /boot
+# tmpfs             394696       0    394696   0% /run/user/1000
+# pi@k8s-head:~ $ docker --version
+# Docker version 19.03.8, build afacb8b
+# pi@k8s-head:~ $ docker run hello-world
+# Unable to find image 'hello-world:latest' locally
+# latest: Pulling from library/hello-world
+# 4ee5c797bcd7: Pull complete 
+# Digest: sha256:f9dfddf63636d84ef479d645ab5885156ae030f611a56f3a7ac7f2fdd86d7e4e
+# Status: Downloaded newer image for hello-world:latest
+# 
+# Hello from Docker!
+# This message shows that your installation appears to be working correctly.
+# 
+# To generate this message, Docker took the following steps:
+#  1. The Docker client contacted the Docker daemon.
+#  2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+#     (arm32v7)
+#  3. The Docker daemon created a new container from that image which runs the
+#     executable that produces the output you are currently reading.
+#  4. The Docker daemon streamed that output to the Docker client, which sent it
+#     to your terminal.
+# 
+# To try something more ambitious, you can run an Ubuntu container with:
+#  $ docker run -it ubuntu bash
+# 
+# Share images, automate workflows, and more with a free Docker ID:
+#  https://hub.docker.com/
+# 
+# For more examples and ideas, visit:
+#  https://docs.docker.com/get-started/
+# 
+# pi@k8s-head:~ $ git --version
+# git version 2.20.1
+# pi@k8s-head:~ $ python --version
+# Python 2.7.16
+# 

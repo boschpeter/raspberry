@@ -1,0 +1,28 @@
+---
+# This is a sitewide playbook run with ansible-playbook sk8s-init-cluster-on-head-node.yml -i hosts -k -K
+# youtube https://www.youtube.com/watch?v=B2wAJ5FLOYw&feature=youtu.be  How to build your own Raspberry Pi Kubernetes Cluster         
+# youtube https://www.youtube.com/watch?v=B2wAJ5FLOYw&feature=youtu.be  How to build your own Raspberry Pi Kubernetes Cluster
+# ansible -i hosts raspifarm_workers -m ping
+# ansible -i hosts rapifarm_workers -m setup | grep user
+# `ansible-galaxy init --init-path roles/ k8s-cluster-setup-head`
+# Role upd was created successfully
+# This playbook configures  the  raspberry PI .
+
+ 
+ - name: k8s-cluster-setup-head
+   hosts:  head
+   handlers:
+     - name: wait-for-reboot
+       wait_for_connection:
+          delay: "5"
+          timeout: "600"
+   remote_user: pi
+   become: true
+   pre_tasks:
+     - shell: echo 'I":" k8s-cluster-setup-head'
+   roles:
+      - k8s-cluster-setup-head
+   post_tasks:
+     - shell: echo 'I":" k8s-cluster-setup-head'
+
+
