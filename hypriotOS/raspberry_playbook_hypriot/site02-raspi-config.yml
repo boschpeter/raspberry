@@ -1,0 +1,43 @@
+---
+# This is a  playbook run with ansible-playbook site02-raspi-config.yml -i hosts -k -K
+# youtube https://www.youtube.com/watch?v=B2wAJ5FLOYw&feature=youtu.be  How to build your own Raspberry Pi Kubernetes Cluster
+# ansible -i hosts raspifarm_workers -m ping
+# ansible -i hosts rapifarm_workers -m setup | grep user
+# ansible-galaxy init --init-path roles/ k8s-raspi-config
+# Role upd was created successfully
+# This playbook configures  the  raspberry PI .
+
+
+###   Configuration raspberry aka raspi-config without screen that is
+#    ssh-keygen -R 192.168.2.30   
+#    ssh-copy-id -i ~/.ssh/id_rsa.pub pi@192.168.2.30  #pwd=raspberry head
+#    Number of key(s) added: 1
+#    Now try logging into the machine, with:   "ssh 'pi@192.168.2.30'"
+#    and check to make sure that only the key(s) you wanted were added.
+    
+  - name: k8s-raspi-config
+    hosts: raspifarm_eth0_master
+    handlers:
+      - name: wait-for-reboot
+        wait_for_connection:
+           delay: "5"
+           timeout: "300"
+    #vars_prompt:
+    # - name: NEWPASSWORD
+    #   prompt: "What is your pi NEWPASSWORD Nw..  ?"
+    #   private: no
+    # - name: PASSPHRASE
+    #   prompt: "What is your WIFI PASSPHRASE F0..  ?"
+    #   private: no      
+    remote_user: pi
+    become: true
+    pre_tasks:
+     - shell: echo 'I":" k8s-raspi-config'
+    roles:
+         - k8s-raspi-config
+    post_tasks:
+       - shell: echo 'I":" k8s-raspi-config ..'
+       
+  
+       
+

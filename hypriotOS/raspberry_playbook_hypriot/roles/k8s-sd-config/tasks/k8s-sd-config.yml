@@ -1,0 +1,98 @@
+#---
+# tasks file for k8s-sd-config
+#    Run with:ansible-playbook -i localhost modify_sd_card_after_flash.yml --extra-vars "ansible_sudo_pass=N.."
+   
+   
+ # delete files 
+     - name: Ansible delete file /media/boscp08/rootfs/etc/hostname
+       file:
+        path: /media/boscp08/rootfs/etc/hostname
+        state: absent
+ 
+     - name: Ansible delete file /media/boscp08/rootfs/etc/hosts
+       file:
+          path: /media/boscp08/rootfs/etc/hosts
+          state: absent
+
+#     - name: Ansible delete file /media/boscp08/rootfs/etc/wpa_supplicant/wpa_supplicant.conf/
+#       file:
+#         path: /media/boscp08/rootfs/etc/wpa_supplicant/wpa_supplicant.conf
+#         state: absent     
+
+##       - name: Ansible delete file /media/boscp08/rootfs/etc/network/interfaces
+##          file:
+##             path: /media/boscp08/rootfs/etc/network/interfaces
+##             state: absent   
+
+# create files
+
+#     - name: Ansible touch  /media/boscp08/boot/ssh   enable ssh
+#       file:
+#         path: "/media/boscp08/boot/ssh"
+#         state: touch
+
+     - name: create file /media/boscp08/rootfs/etc/hostsname
+       copy:
+        dest: "/media/boscp08/rootfs/etc/hostname"
+        content: |
+           {{ K8S_HOSTNAME }} 
+
+     - name: create file /media/boscp08/rootfs/etc/hosts
+       copy:
+        dest: "/media/boscp08/rootfs/etc/hosts"
+        content: |
+          127.0.0.1      localhost
+          ::1	    	localhost ip6-localhost ip6-loopback
+          ff02::1		ip6-allnodes
+          ff02::2		ip6-allrouters
+          127.0.1.1      {{ K8S_HOSTNAME }} 
+  
+     - name: create file /media/boscp08/rootfs/etc/wpa_supplicant/wpa_supplicant.conf
+       copy:
+         dest: "/media/boscp08/rootfs/etc/wpa_supplicant/wpa_supplicant.conf"
+         content: |
+           ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+           update_config=1
+           country=NL
+#        
+#         network={
+#                 ssid="ThomsomFB0530"
+#                 psk="F0B"
+#         }
+#               
+#        - name: create file /media/boscp08/rootfs/etc/network/interfaces
+#          copy:
+#            dest: "/media/boscp08/rootfs/etc/network/interfaces"
+#            content: |
+#             # interfaces(5) file used by ifup(8) and ifdown(8)
+#             # Please note that this file is written to be used with dhcpcd
+#             # For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'
+#            
+#             # Include files from /etc/network/interfaces.d:
+#             source-directory /etc/network/interfaces.d
+#             allow-hotplug wlan0
+#             iface wlan0 inet dhcp
+#             wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+#             dns-nameservers=8.8.8.8 8.8.4.4
+            
+# sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+# ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+# update_config=1
+            
+# country=NL
+# 
+# 
+# network={
+#         ssid="ThomsomFB0530"
+#         psk="F0B787EB89"
+# }                 
+
+
+# boscp08@boscp08-dingo:.../etc$ cat hosts
+# 127.0.0.1	localhost
+# ::1		localhost ip6-localhost ip6-loopback
+# ff02::1		ip6-allnodes
+# ff02::2		ip6-allrouters
+# 
+# 127.0.1.1       raspberrypi
+                     

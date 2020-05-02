@@ -1,0 +1,4 @@
+---
+# vars file for k8s-install-docker-kubectl
+REBOOT: True #Should i reboot at the end of this playbook?
+UPDATE: True

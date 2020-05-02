@@ -1,0 +1,32 @@
+---
+
+# This is a sitewide playbook  julia
+# filename: site.yml
+# cd into /home/boscp08/Kubernetes/ansible/raspberry_playbook_k8s
+# cmd= ansible-playbook site.yml -i hosts -k -K
+
+#   - include: site01-sd-card-config.yml  
+    
+    - include: site02-raspi-config.yml  
+ 
+    - include: site03-install-docker-kubectl.yml
+
+ 
+ # ansible -i hosts raspifarm_eth0_master  -m ping
+ # ubuntuvbx | SUCCESS => {
+ #    "ansible_facts": {
+ #        "discovered_interpreter_python": "/usr/bin/python"
+ #    }, 
+ #    "changed": false, 
+ #    "ping": "pong"
+ #}
+ #ubuntuvmx | SUCCESS => {
+ #    "ansible_facts": {
+ #        "discovered_interpreter_python": "/usr/bin/python"
+ #    }, 
+ #    "changed": false, 
+ #    "ping": "pong"
+ #}
+ # ansible -i hosts dingofarm_workers -m ping
+ # ansible -i hosts dingofarm_workers -m setup | grep user
+ # ansible-galaxy init --init-path roles/ upd

@@ -1,0 +1,37 @@
+---
+# vars file for k8s-raspi-config
+
+UPDATE: True
+REBOOT: True #Should i reboot at the end of this playbook?
+UPDATE: True
+#HOSTNAME: "picasa"
+#HOSTNAME: "k8s-master-lltv"  to be set on sd card etc 
+#HOSTNAME: "k8s-worker-01"    to be set on sd card etc 
+USER: "pi"
+NEWPASSWORD: "Nw2xdirh"
+WIFI_COUNTRY: "NL"
+SSID: "ThomsomFB0530"
+PASSPHRASE: "F0B787EB89"
+MEMSPLIT: "128"
+BOOTBEHAVIOUR: "B2" #B1 cli, B2 cli autologin, B3 desktop, B4 desktop autologin
+LOCALE: "it_IT.UTF-8"
+TIMEZONE: "Europe/Rome"
+XKBLAYOUT: "it" #default "gb"
+NETNAMES: False
+SSH: True
+SERIAL: True
+CAMERA: false
+VNC: False
+SPI: False
+I2C: True
+ONEWIRE: False
+RGPIO: False
+BOOTWAIT: False
+BOOTSPLASH: False
+OVERSCAN: False
+OVERCLOCK: False
+HDMI_GROUP: False
+HDMI_MOD: False
+PIXDUB: False
+AUDIO_OUT: "0" #0 Auto, 1 Force 3.5mm, 2 Force hdmi
+GLDRIVER: False #G1 Full KMS, G2 Fake KMS, G3 Legacy

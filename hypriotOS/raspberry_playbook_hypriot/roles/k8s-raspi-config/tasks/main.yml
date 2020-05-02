@@ -1,0 +1,4 @@
+---
+# tasks file for k8s-raspi-config
+- include:  k8s-raspi-config.yml
+#- include: apt-get_update.yml
