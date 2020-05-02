@@ -1,3 +1,0 @@
----
-# tasks file for k8s-sd-config
-- include:  k8s-sd-config.yml

@@ -1,81 +1,14 @@
-#[www]
-#192.168.61.10 ansible_ssh_user=boscp08ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
-# This is the custom ansible 'hosts' file.
-#boscp08@boscp08-dingo:~/.../julia$ ansible -i hosts dingofarm_workers -m ping
-#ubuntuvbx | SUCCESS => {
-#    "ansible_facts": {
-#        "discovered_interpreter_python": "/usr/bin/python"
-#    }, 
-#    "changed": false, 
-#    "ping": "pong"
-#}
-#ubuntuvmx | SUCCESS => {
-#    "ansible_facts": {
-#        "discovered_interpreter_python": "/usr/bin/python"
-#    }, 
-#    "changed": false, 
-#    "ping": "pong"
-#}
 # ansible-playbook site.yml -i hosts -k -K 
+# ansible -i hosts hypriot -m ping
+#[WARNING]: Platform linux on host 192.168.2.6 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+#https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+#192.168.2.6 | SUCCESS => {
+#    "ansible_facts": {
+#        "discovered_interpreter_python": "/usr/bin/python"
+#    }, 
+#    "changed": false, 
+#    "ping": "pong"
+#}
 
-[localhost]
-127.0.0.1 ansible_user=boscp08
-
-[raspifarm_wlan_master]
-master ansible_user=pi  # 192.168.2.20
-
-[raspifarm_wlan_workers]
-worker-01  ansible_user=pi   # 192.168.2.21
-worker-02  ansible_user=pi   # 192.168.2.22
-worker-03  ansible_user=pi   # 192.168.2.23
-
-[raspifarm_eth0_master]
-192.168.2.30  ansible_user=pi  
-192.168.2.31  ansible_user=pi 
-192.168.2.32  ansible_user=pi 
-192.168.2.33  ansible_user=pi    
-
-
-#[raspifarm_eth0_workers]
-#node-01  ansible_user=pi   # 192.168.2.31
-#node-02  ansible_user=pi   # 192.168.2.32
-#node-03  ansible_user=pi   # 192.168.2.33
-
-
-#[master]
-#k8s-master ansible_ssh_host=192.168.2.30
-
-#[node]
-#k8s-node1 ansible_ssh_host=192.168.2.21
-#k8s-node2 ansible_ssh_host=192.168.2.22
-#k8s-node3 ansible_ssh_host=192.168.2.23
-
-#[cluster:children]
-#master
-#node
-
-[cluster:vars]
-ansible_user=pi
-
-# /etc/hosts file for dhcp mappings  macadress - ip address
-#127.0.0.1       localhost
-#10.127.19.132   api.lpc-ot2.k8s.easi
-## The following lines are desirable for IPv6 capable hosts
-
-## wlan0
-#192.168.2.20    master
-#192.168.2.21    worker-01
-#192.168.2.22    worker-02
-#192.168.2.23    worker-03
-#
-## eth0 
-#192.168.2.30    head                   
-#192.168.2.31    node-01
-#192.168.2.32    node-02
-#192.168.2.33    node-03
-#::1     ip6-localhost ip6-loopback
-#fe00::0 ip6-localnet
-#ff00::0 ip6-mcastprefix
-#ff02::1 ip6-allnodes
-#ff02::2 ip6-allrouters
-
+[hypriot_worker]
+192.168.2.6 ansible_user=pirate
