@@ -13,3 +13,10 @@ alias pi5='ssh pi@192.168.2.55'
 alias mntha55='sudo mount -t cifs -o user=homeassistant,password=homeassistant //192.168.2.55/config /mnt/nfsshare'
 
 
+## shuthdown -h now
+
+[automatic-shutdown-at-specified-times](https://askubuntu.com/questions/567955/automatic-shutdown-at-specified-times)
+````
+30 23 * * * root shutdown -h now
+At 23:30 (11:30 PM), the kiosk will shut down. No matter what user is logged in, the shutdown command runs as root.
+````
